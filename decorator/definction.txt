@@ -1,0 +1,2 @@
+decorator pattern  allow behavior to be to added individual object either without
+affecting to the behavior other object from the same class
