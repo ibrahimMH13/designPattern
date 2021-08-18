@@ -8,6 +8,7 @@ require('./adapter/Adapter.php');
 this pattern when we are want use exists interface in or with other
 interface without modify his code source
 */
+/*** adapter Pattern ***/
 $youtube = new YouTube;
 $fb      = new FaceBook;
 /*
@@ -59,3 +60,19 @@ $fullFeature = new SupportFeature(new AdditionalSpaceFeature(new BasicSubscripti
 # echo 'description# '.  $fullFeature->description();
 # echo "\n";
 /***********************************************/
+
+/*** factory Pattern ***/
+
+require './factory/Config.php';
+require './factory/UploaderFactory.php';
+require './factory/AdapterFactory.php';
+require './factory/Uploader.php';
+require './factory/FtpAdapter.php';
+require './factory/S3Adapter.php';
+$config  = new Config();
+# $config->get('upload.services.ftp.host');
+$uploader = new UploaderFactory(new AdapterFactory);
+$factory = $uploader->make($config);
+$driver  = $factory->make();
+$x       = $driver->upload('s','d');
+ die(var_dump($x));

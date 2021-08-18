@@ -16,5 +16,5 @@ abstract class SubscriptionFeature implements Subscription
     }
 
     abstract public function price();
-   abstract public function description();
+    abstract public function description();
 }
