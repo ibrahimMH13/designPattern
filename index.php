@@ -105,3 +105,15 @@ $event2 = new MailingSignUpTwo(new User);
 $event2->attach(new UpdateMailingDatabaseTwo());
 $event2->notify();
 #die(var_dump($event2));
+
+/***********************************************/
+
+/*** Singleton Pattern ***/
+
+require './singleton/Singleton.php';
+require './singleton/AppConfig.php';
+$config = AppConfig::getInstance();
+$anotherConfig = AppConfig::getInstance();
+#$config3 = new AppConfig(); should error appear
+#$config4 = clone $config;   should error appear
+#die(var_dump($config===$anotherConfig));
