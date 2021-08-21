@@ -98,12 +98,12 @@ $event->attach(new UpdateMailingDatabasesStatus);
 $event->attach(new SubscribeUserToMailList);
 #$event->detach(new UpdateMailingDatabasesStatus);
 #die(var_dump($event));
-$event->notify();
+#$event->notify();
 
 #part 2#
-$event2 = new MailingSignUpTwo(new User);
-$event2->attach(new UpdateMailingDatabaseTwo());
-$event2->notify();
+#$event2 = new MailingSignUpTwo(new User);
+#$event2->attach(new UpdateMailingDatabaseTwo());
+#$event2->notify();
 #die(var_dump($event2));
 
 /***********************************************/
@@ -117,3 +117,23 @@ $anotherConfig = AppConfig::getInstance();
 #$config3 = new AppConfig(); should error appear
 #$config4 = clone $config;   should error appear
 #die(var_dump($config===$anotherConfig));
+
+/***********************************************/
+
+/*** Singleton Pattern ***/
+
+require './specification/Lesson.php';
+require './specification/IsActive.php';
+require './specification/validator/ValidatorInterface.php';
+require './specification/validator/ValidatorWithArgument.php';
+require './specification/validator/ValidatorWithNonArgument.php';
+require './specification/validator/Validator.php';
+require './specification/validator/IsString.php';
+require './specification/validator/IsGreatThan.php';
+$lesson = new Lesson();
+$isActive = (new IsActive)->isSatisfiedBy($lesson);
+
+$validator = new Validator;
+$valid     = $validator->isString()->IsGreatThan(2)->withInput(46546)->isValid();
+
+die('<prev>'.var_dump($valid));
