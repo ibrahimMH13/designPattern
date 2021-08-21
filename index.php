@@ -1,4 +1,12 @@
 <?php
+
+
+use DesignPattern\strategy\Cat\Actions\Move\Jump;
+use DesignPattern\strategy\Cat\Actions\Sound\Growl;
+use DesignPattern\strategy\Cat\Actions\Sound\Meow;
+use DesignPattern\strategy\Cat\Cat;
+
+require './vendor/autoload.php';
 require('./adapter/PlayerInterface.php');
 require('./adapter/YouTube.php');
 require('./adapter/FaceBook.php');
@@ -136,4 +144,22 @@ $isActive = (new IsActive)->isSatisfiedBy($lesson);
 $validator = new Validator;
 $valid     = $validator->isString()->IsGreatThan(2)->withInput(46546)->isValid();
 
-die('<prev>'.var_dump($valid));
+#die('<prev>'.var_dump($valid));
+
+/***********************************************/
+
+    /*** Strategy Pattern ***/
+$cat  = new Cat(new Meow,new Jump);
+$lion = new Cat(new Growl,new Jump);
+echo $cat->sound();
+echo "\n";
+echo $cat->move();
+echo "\n ********\n";
+echo $lion->sound();
+echo "\n";
+echo $lion->move();
+echo "\nchange cat at run time\n";
+$cat->setSound(new Growl);
+echo  $cat->sound();
+#die(var_dump($cat));
+
