@@ -75,4 +75,33 @@ $uploader = new UploaderFactory(new AdapterFactory);
 $factory = $uploader->make($config);
 $driver  = $factory->make();
 $x       = $driver->upload('s','d');
- die(var_dump($x));
+/***********************************************/
+
+/*** Observer Pattern ***/
+require './observer/Observer.php';
+require './observer/Event.php';
+require './observer/Eventable.php';
+require './observer/MailingSignUp.php';
+require './observer/UpdateMailingDatabasesStatus.php';
+require './observer/SubscribeUserToMailList.php';
+require './observer/User.php';
+require './observer/spl/SplEvent.php';
+require './observer/spl/MailingSignUpTwo.php';
+require './observer/spl/UpdateMailingDatabaseTwo.php';
+
+
+
+# part 1#
+
+$event = new MailingSignUp(new User);
+$event->attach(new UpdateMailingDatabasesStatus);
+$event->attach(new SubscribeUserToMailList);
+#$event->detach(new UpdateMailingDatabasesStatus);
+#die(var_dump($event));
+$event->notify();
+
+#part 2#
+$event2 = new MailingSignUpTwo(new User);
+$event2->attach(new UpdateMailingDatabaseTwo());
+$event2->notify();
+#die(var_dump($event2));
