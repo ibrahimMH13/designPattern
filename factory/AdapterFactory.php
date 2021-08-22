@@ -1,6 +1,7 @@
 <?php
 
 
+namespace DesignPattern\factory;
 class AdapterFactory
 {
 

@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\adapter;
 class Adapter
 {
     /**

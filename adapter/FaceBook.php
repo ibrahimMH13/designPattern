@@ -1,5 +1,6 @@
 <?php
 
+namespace DesignPattern\adapter;
 
 class FaceBook implements PlayerInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\observer;
 interface Event
 {
     public function attach(Observer $observer);

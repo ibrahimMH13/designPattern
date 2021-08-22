@@ -1,5 +1,6 @@
 <?php
 
+namespace DesignPattern\decorator;
 
 class AdditionalSpaceFeature extends SubscriptionFeature
 {

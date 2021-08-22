@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\observer\spl;
 class MailingSignUpTwo extends SplEvent
 {
     public $user;

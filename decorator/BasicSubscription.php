@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\decorator;
 class BasicSubscription implements Subscription
 {
 

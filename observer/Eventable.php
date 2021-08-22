@@ -1,5 +1,5 @@
 <?php
-
+namespace DesignPattern\observer;
 trait Eventable
 {
     private $observers =[];

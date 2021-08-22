@@ -1,6 +1,25 @@
 <?php
 
 
+use DesignPattern\adapter\Adapter;
+use DesignPattern\adapter\FaceBook;
+use DesignPattern\adapter\YouTube;
+use DesignPattern\decorator\AdditionalSpaceFeature;
+use DesignPattern\decorator\BasicSubscription;
+use DesignPattern\decorator\SupportFeature;
+use DesignPattern\factory\AdapterFactory;
+use DesignPattern\factory\Config;
+use DesignPattern\factory\UploaderFactory;
+use DesignPattern\observer\MailingSignUp;
+use DesignPattern\observer\spl\MailingSignUpTwo;
+use DesignPattern\observer\spl\UpdateMailingDatabaseTwo;
+use DesignPattern\observer\SubscribeUserToMailList;
+use DesignPattern\observer\UpdateMailingDatabasesStatus;
+use DesignPattern\observer\User;
+use DesignPattern\singleton\AppConfig;
+use DesignPattern\specification\IsActive;
+use DesignPattern\specification\Lesson;
+use DesignPattern\specification\validator\Validator;
 use DesignPattern\strategy\Cat\Actions\Move\Jump;
 use DesignPattern\strategy\Cat\Actions\Sound\Growl;
 use DesignPattern\strategy\Cat\Actions\Sound\Meow;
@@ -10,10 +29,6 @@ use DesignPattern\strategy\src\App\Parse\ArrayParser;
 use DesignPattern\strategy\src\App\Parse\JsonParser;
 
 require './vendor/autoload.php';
-require('./adapter/PlayerInterface.php');
-require('./adapter/YouTube.php');
-require('./adapter/FaceBook.php');
-require('./adapter/Adapter.php');
 //adapter design Pattern
 /*
 this pattern when we are want use exists interface in or with other
@@ -28,15 +43,10 @@ we can use variables or injection class direct
 $adapter1 = new Adapter(new FaceBook);
 $adapter2 = new Adapter(new YouTube);
 /***********************************************/
-# echo $adapter1->views(10); uncomment for run #/
+#echo $adapter1->views(10); //uncomment for run #/
 /***********************************************/
-/*** Decorator Pattern ***/
 
-require './decorator/Subscription.php';
-require './decorator/SubscriptionFeature.php';
-require './decorator/AdditionalSpaceFeature.php';
-require './decorator/BasicSubscription.php';
-require './decorator/SupportFeature.php';
+/*** Decorator Pattern ***/
 
 $basicSub = new BasicSubscription;//normal class
 /***********************************************/
@@ -74,46 +84,28 @@ $fullFeature = new SupportFeature(new AdditionalSpaceFeature(new BasicSubscripti
 
 /*** factory Pattern ***/
 
-require './factory/Config.php';
-require './factory/UploaderFactory.php';
-require './factory/AdapterFactory.php';
-require './factory/Uploader.php';
-require './factory/FtpAdapter.php';
-require './factory/S3Adapter.php';
-$config  = new Config();
-# $config->get('upload.services.ftp.host');
+$config  = new Config;
+$config->get('upload.services.ftp.host');
 $uploader = new UploaderFactory(new AdapterFactory);
-$factory = $uploader->make($config);
-$driver  = $factory->make();
-$x       = $driver->upload('s','d');
+$factory  = $uploader->make($config);
+$driver   = $factory->make();
+$result   = $driver->upload('s','d');
+#echo $result;
 /***********************************************/
 
 /*** Observer Pattern ***/
-require './observer/Observer.php';
-require './observer/Event.php';
-require './observer/Eventable.php';
-require './observer/MailingSignUp.php';
-require './observer/UpdateMailingDatabasesStatus.php';
-require './observer/SubscribeUserToMailList.php';
-require './observer/User.php';
-require './observer/spl/SplEvent.php';
-require './observer/spl/MailingSignUpTwo.php';
-require './observer/spl/UpdateMailingDatabaseTwo.php';
-
-
 
 # part 1#
-
 $event = new MailingSignUp(new User);
 $event->attach(new UpdateMailingDatabasesStatus);
 $event->attach(new SubscribeUserToMailList);
-#$event->detach(new UpdateMailingDatabasesStatus);
+$event->detach(new UpdateMailingDatabasesStatus);
 #die(var_dump($event));
 #$event->notify();
 
 #part 2#
-#$event2 = new MailingSignUpTwo(new User);
-#$event2->attach(new UpdateMailingDatabaseTwo());
+$event2 = new MailingSignUpTwo(new User);
+$event2->attach(new UpdateMailingDatabaseTwo);
 #$event2->notify();
 #die(var_dump($event2));
 
@@ -121,8 +113,6 @@ $event->attach(new SubscribeUserToMailList);
 
 /*** Singleton Pattern ***/
 
-require './singleton/Singleton.php';
-require './singleton/AppConfig.php';
 $config = AppConfig::getInstance();
 $anotherConfig = AppConfig::getInstance();
 #$config3 = new AppConfig(); should error appear
@@ -131,21 +121,13 @@ $anotherConfig = AppConfig::getInstance();
 
 /***********************************************/
 
-/*** Singleton Pattern ***/
+/*** Specification Pattern ***/
 
-require './specification/Lesson.php';
-require './specification/IsActive.php';
-require './specification/validator/ValidatorInterface.php';
-require './specification/validator/ValidatorWithArgument.php';
-require './specification/validator/ValidatorWithNonArgument.php';
-require './specification/validator/Validator.php';
-require './specification/validator/IsString.php';
-require './specification/validator/IsGreatThan.php';
-$lesson = new Lesson();
+$lesson = new Lesson;
 $isActive = (new IsActive)->isSatisfiedBy($lesson);
 
 $validator = new Validator;
-$valid     = $validator->isString()->IsGreatThan(2)->withInput(46546)->isValid();
+$valid     = $validator->IsString()->IsGreatThan(2)->withInput(46546)->isValid();
 
 #die('<prev>'.var_dump($valid));
 
@@ -172,4 +154,4 @@ $config =new StrategyConfig(new ArrayParser);
 $config->load('strategy/src/Config/databases.php');
 $config->setParser(new JsonParser());
 $config->load('strategy/src/Config/databases.json');
-die(var_dump($config));
+#die(var_dump($config));

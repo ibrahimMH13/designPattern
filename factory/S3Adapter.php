@@ -1,5 +1,6 @@
 <?php
 
+namespace DesignPattern\factory;
 
 class S3Adapter
 {

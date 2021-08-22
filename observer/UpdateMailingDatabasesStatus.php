@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\observer;
 class UpdateMailingDatabasesStatus implements Observer
 {
 

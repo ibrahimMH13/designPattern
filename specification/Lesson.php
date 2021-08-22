@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\specification;
 class Lesson
 {
 

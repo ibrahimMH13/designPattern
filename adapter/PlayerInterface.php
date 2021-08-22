@@ -1,5 +1,5 @@
 <?php
-
+namespace DesignPattern\adapter;
 
 interface PlayerInterface
 {

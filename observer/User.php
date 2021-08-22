@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\observer;
 class User
 {
    protected $userId = 101;

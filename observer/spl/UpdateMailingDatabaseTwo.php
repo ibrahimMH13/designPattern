@@ -1,10 +1,11 @@
 <?php
 
+namespace DesignPattern\observer\spl;
 
-class UpdateMailingDatabaseTwo implements SplObserver
+class UpdateMailingDatabaseTwo implements \SplObserver
 {
 
-    public function update(SplSubject $subject)
+    public function update(\SplSubject $subject)
     {
         echo  "php Engine Observer# mail status db for {$subject->user->getUserId()} updated \n";
     }

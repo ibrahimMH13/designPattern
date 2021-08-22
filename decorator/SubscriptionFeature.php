@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\decorator;
 abstract class SubscriptionFeature implements Subscription
 {
 

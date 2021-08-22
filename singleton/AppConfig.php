@@ -1,5 +1,6 @@
 <?php
 
+namespace DesignPattern\singleton;
 
 class AppConfig extends Singleton
 {

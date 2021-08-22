@@ -1,5 +1,5 @@
 <?php
-
+namespace DesignPattern\adapter;
 
 class YouTube implements PlayerInterface
 {

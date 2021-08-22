@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\specification;
 class IsActive
 {
     public function isSatisfiedBy($item){

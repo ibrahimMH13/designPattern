@@ -1,24 +1,21 @@
 <?php
 
-
-abstract  class SplEvent implements SplSubject
+namespace DesignPattern\observer\spl;
+abstract  class SplEvent implements \SplSubject
 {
-    /**
-     * @var SplObjectStorage
-     */
     private $storage;
 
     public function __construct()
     {
-        $this->storage = new SplObjectStorage();
+        $this->storage = new \SplObjectStorage;
     }
 
-    public function attach(SplObserver $observer)
+    public function attach(\SplObserver $observer)
     {
        $this->storage->attach($observer);
     }
 
-    public function detach(SplObserver $observer)
+    public function detach(\SplObserver $observer)
     {
         if (!$this->storage->contains($observer))return;
         $this->storage->detach($observer);

@@ -1,6 +1,7 @@
 <?php
 
 
+namespace DesignPattern\observer;
 class MailingSignUp implements Event
 {
     use Eventable;

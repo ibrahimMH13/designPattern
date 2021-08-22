@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\specification\validator;
 class IsString implements ValidatorWithNonArgument
 {
     public function isSatisfiedBy($item){

@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\observer;
 class SubscribeUserToMailList implements Observer
 {
 

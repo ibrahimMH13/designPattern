@@ -1,6 +1,6 @@
 <?php
 
-
+namespace DesignPattern\specification\validator;
 class Validator
 {
     protected $roles = [];
@@ -17,7 +17,8 @@ class Validator
 
     public function getRule($rule)
     {
-        return new $rule;
+        $class = "DesignPattern\\specification\\validator\\{$rule}";
+        return  new $class;
     }
 
     public function withInput($input)
@@ -35,4 +36,5 @@ class Validator
         }
         return true;
     }
+
 }
