@@ -5,6 +5,9 @@ use DesignPattern\strategy\Cat\Actions\Move\Jump;
 use DesignPattern\strategy\Cat\Actions\Sound\Growl;
 use DesignPattern\strategy\Cat\Actions\Sound\Meow;
 use DesignPattern\strategy\Cat\Cat;
+use DesignPattern\strategy\src\App\config\Config as StrategyConfig;
+use DesignPattern\strategy\src\App\Parse\ArrayParser;
+use DesignPattern\strategy\src\App\Parse\JsonParser;
 
 require './vendor/autoload.php';
 require('./adapter/PlayerInterface.php');
@@ -151,15 +154,22 @@ $valid     = $validator->isString()->IsGreatThan(2)->withInput(46546)->isValid()
     /*** Strategy Pattern ***/
 $cat  = new Cat(new Meow,new Jump);
 $lion = new Cat(new Growl,new Jump);
-echo $cat->sound();
-echo "\n";
-echo $cat->move();
-echo "\n ********\n";
-echo $lion->sound();
-echo "\n";
-echo $lion->move();
-echo "\nchange cat at run time\n";
-$cat->setSound(new Growl);
-echo  $cat->sound();
+#echo $cat->sound();
+#echo "\n";
+#echo $cat->move();
+#echo "\n ********\n";
+#echo $lion->sound();
+#echo "\n";
+#echo $lion->move();
+#echo "\n change cat at run time\n";
+#$cat->setSound(new Growl);
+#echo  $cat->sound();
 #die(var_dump($cat));
 
+//Part 2 - realy Example
+
+$config =new StrategyConfig(new ArrayParser);
+$config->load('strategy/src/Config/databases.php');
+$config->setParser(new JsonParser());
+$config->load('strategy/src/Config/databases.json');
+die(var_dump($config));
